@@ -1,12 +1,12 @@
 import { Model, DataTypes } from 'sequelize';
 import db from '.';
 
-export default class TeamModel extends Model {
+export default class Team extends Model {
   declare id: number;
   declare teamName: string;
 }
 
-TeamModel.init({
+Team.init({
   id: {
     allowNull: false,
     autoIncrement: true,
