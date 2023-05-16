@@ -1,5 +1,7 @@
 import * as express from 'express';
-import { TeamsRouter } from './routes';
+import 'express-async-errors';
+import { TeamsRouter, UsersRouter } from './routes';
+import ErrorHandler from './middlewares/ErrorHandler';
 
 class App {
   public app: express.Express;
@@ -9,6 +11,8 @@ class App {
 
     this.config();
     this.app.use('/teams', TeamsRouter);
+    this.app.use('/login', UsersRouter);
+    this.app.use(ErrorHandler);
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));

@@ -2,18 +2,22 @@ import Model from '../database/models/Team.model';
 
 export default class TeamsService {
   findAll = async (): Promise<Model[]> => {
-    try {
-      const teams = await Model.findAll();
-      return teams;
-    } catch (error) {
-      throw new Error('Failed to find all teams');
+    const teams = await Model.findAll();
+
+    if (!teams) {
+      const error: Error & { status?: number } = new Error('Teams not found');
+      error.status = 404;
+      throw error;
     }
+    return teams;
   };
 
   findById = async (id: number): Promise<Model> => {
     const team = await Model.findByPk(id);
     if (!team) {
-      throw new Error('Team not found');
+      const error: Error & { status?: number } = new Error('Team not found');
+      error.status = 404;
+      throw error;
     }
     return team;
   };

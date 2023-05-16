@@ -1,9 +1,9 @@
 import TeamsRouter from './teams.router';
 import MatchesRouter from './matches.router';
-import LoginRouter from './login.router';
+import UsersRouter from './users.router';
 
 export {
   TeamsRouter,
   MatchesRouter,
-  LoginRouter,
+  UsersRouter,
 };
