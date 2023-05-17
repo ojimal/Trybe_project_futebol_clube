@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import Model from '../database/models/Match.model';
 import TeamModel from '../database/models/Team.model';
 
@@ -38,32 +37,20 @@ class MatchesService {
     const homeTeamExists = await TeamModel.findOne({
       where: { id: newMatch.homeTeamId },
     });
-
     const awayTeamExists = await TeamModel.findOne({
       where: { id: newMatch.awayTeamId },
     });
-
     if (!homeTeamExists || !awayTeamExists) {
       const error: Error & { status?: number } = new Error(
-        'No Teams matches this id',
+        'There is no team with such id!',
       );
       error.status = 404;
       throw error;
     }
-
-    if (newMatch.homeTeamId === newMatch.awayTeamId) {
-      const error: Error & { status?: number } = new Error(
-        'It is not possible to create a match with two equal teams',
-      );
-      error.status = 422;
-      throw error;
-    }
-
     const match = await Model.create({
       ...newMatch,
       inProgress: true,
     });
-
     return match;
   };
 
