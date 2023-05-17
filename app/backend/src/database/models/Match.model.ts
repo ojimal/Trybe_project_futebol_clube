@@ -1,8 +1,8 @@
 import { Model, DataTypes } from 'sequelize';
 import db from '.';
-import TeamModel from './Team.model';
+import Team from './Team.model';
 
-export default class MatchModel extends Model {
+export default class Match extends Model {
   declare id: number;
   declare homeTeamId: number;
   declare homeTeamGoals: number;
@@ -11,7 +11,7 @@ export default class MatchModel extends Model {
   declare inProgress: boolean;
 }
 
-MatchModel.init({
+Match.init({
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -44,8 +44,8 @@ MatchModel.init({
   timestamps: false,
 });
 
-TeamModel.hasMany(MatchModel, { foreignKey: 'homeTeamId', as: 'homeMatches' });
-TeamModel.hasMany(MatchModel, { foreignKey: 'awayTeamId', as: 'awayMatches' });
+Team.hasMany(Match, { foreignKey: 'homeTeamId', as: 'homeMatches' });
+Team.hasMany(Match, { foreignKey: 'awayTeamId', as: 'awayMatches' });
 
-MatchModel.belongsTo(TeamModel, { foreignKey: 'homeTeamId', as: 'homeTeam' });
-MatchModel.belongsTo(TeamModel, { foreignKey: 'awayTeamId', as: 'awayTeam' });
+Match.belongsTo(Team, { foreignKey: 'homeTeamId', as: 'homeTeam' });
+Match.belongsTo(Team, { foreignKey: 'awayTeamId', as: 'awayTeam' });
