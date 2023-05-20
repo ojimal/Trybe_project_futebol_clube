@@ -5,9 +5,7 @@ import tokenAuth from '../middlewares/TokenAuth';
 
 const router = Router();
 
-const usersController = new Controller();
-
-router.post('/', loginAuth, (req, res) => usersController.login(req, res));
-router.get('/role', tokenAuth, (req, res) => usersController.findRole(req, res));
+router.post('/', loginAuth, (req, res) => Controller.login(req, res));
+router.get('/role', tokenAuth, (req, res) => Controller.findRole(req, res));
 
 export default router;

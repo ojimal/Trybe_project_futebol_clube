@@ -3,7 +3,7 @@ import Model from '../database/models/User.model';
 import { generateToken } from '../utils/jwt';
 
 export default class UsersService {
-  login = async (email: string, password: string): Promise<string | null> => {
+  static async login(email: string, password: string): Promise<string | null> {
     const user = await Model.findOne({ where: { email } });
 
     if (!user) {
@@ -22,9 +22,9 @@ export default class UsersService {
 
     const token = generateToken(email);
     return token;
-  };
+  }
 
-  findRole = async (email: string): Promise<string | null> => {
+  static async findRole(email: string): Promise<string | null> {
     const user = await Model.findOne({ where: { email } });
 
     if (!user) {
@@ -34,5 +34,5 @@ export default class UsersService {
     }
 
     return user.dataValues.role || null;
-  };
+  }
 }
