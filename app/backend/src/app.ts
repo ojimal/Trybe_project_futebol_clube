@@ -1,6 +1,6 @@
 import * as express from 'express';
 import 'express-async-errors';
-import { TeamsRouter, UsersRouter, MatchesRouter } from './routes';
+import { TeamsRouter, UsersRouter, MatchesRouter, LeaderBoardRouter } from './routes';
 import ErrorHandler from './middlewares/ErrorHandler';
 
 class App {
@@ -13,6 +13,7 @@ class App {
     this.app.use('/teams', TeamsRouter);
     this.app.use('/login', UsersRouter);
     this.app.use('/matches', MatchesRouter);
+    this.app.use('/leaderboard', LeaderBoardRouter);
     this.app.use(ErrorHandler);
 
     // Não remover essa rota
